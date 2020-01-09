@@ -6,11 +6,13 @@
 package lendle.courses.wp.finalexam;
 
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import static lendle.courses.wp.finalexam.Logins.getUserData;
 
 /**
  *
@@ -32,6 +34,27 @@ public class LoginAction extends HttpServlet {
         String id=request.getParameter("id");
         String password=request.getParameter("password");
         HttpSession session=request.getSession();
+        
+        if (id == "user1"){
+            session.setAttribute("id", id);
+            session.setAttribute("password", password);
+            session.setAttribute("note", Logins.getUserData("user1"));
+            response.sendRedirect("showNotes.jsp");       
+     
+        }else if (id == "user2"){
+            session.setAttribute("id", id);
+            session.setAttribute("password", password);
+            session.setAttribute("note", Logins.getUserData("user2"));
+            response.sendRedirect("showNotes.jsp");       
+        }else if (id == "user3"){
+            session.setAttribute("id", id);
+            session.setAttribute("password", password);
+            session.setAttribute("note", Logins.getUserData("user3"));
+        }else{
+            response.sendRedirect("index.jsp");
+        }
+
+        
         //當帳號密碼正確時（使用 Logins 來取得 UserData），通過登入（記得記錄在session，存在 user 屬性中）
         //並轉址到 showNotes.jsp
         //否則轉址到 index.jsp

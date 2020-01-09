@@ -18,23 +18,41 @@
         crossorigin="anonymous"></script>
     </head>
     <body>
+        
         <a href="logout.jsp">登出</a><br/>
       
       <!--
       將目前 session 中記錄的 user 的 notes 顯示在下列表格中
       (20%)
       -->
-      <table border="1" style="width: 90%">
-          <thead>
-              <tr>
-                  <th>Date</th>
-                  <th>Title</th>
-                  <th>Content</th>
-              </tr>
-          </thead>
-          <tbody>
+      <%
+          
+        ArrayList id_list=(ArrayList)session.getAttribute("id"); 
+        ArrayList note_list=(ArrayList)session.getAttribute("note"); 
+        
+        for(int i=0;id_list!=null && i<id_list.size();i++){
+                    String id=(String)id_list.get(i);
+                    out.println("<li>"+id+"</li>");
+                    String note=(String)note_list.get(i);
+                    out.println("<li>"+note+"</li>");
+                }
+        
+      %>
+      
+      
+        <table border="1" style="width: 90%">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Title</th>
+                    <th>Content</th>
+                </tr>
               
-          </tbody>
+         
+        </thead>
+        <tbody>
+              
+        </tbody>
       </table>
     </body>
 </html>
